@@ -1,0 +1,19 @@
+# mount point       fstype    device                                                                flags
+
+
+/metadata      ext4    /dev/block/bootdevice/by-name/metadata                    flags=display="Metadata";backup=1;wrappedkey
+/data          f2fs    /dev/block/bootdevice/by-name/userdata                    flags=fileencryption=aes-256-xts:aes-256-cts;wrappedkey;keydirectory=/metadata/vold/metadata_encryption;encryptable=footer
+/storage       ext4    /data/media/0                                             flags=display="Internal Storage";usermrf;backup=1;fsflags="bind";removable
+/boot          emmc    /dev/block/bootdevice/by-name/boot                        flags=backup=1;flashimg=1;slotselect
+/dtbo          emmc    /dev/block/bootdevice/by-name/dtbo                        flags=backup=1;display="Dtbo";flashimg=1;slotselect
+/firmware      vfat    /dev/block/bootdevice/by-name/modem                       flags=display="Firmware";slotselect
+/misc          emmc    /dev/block/bootdevice/by-name/misc
+/modem         emmc    /dev/block/bootdevice/by-name/modem                       flags=backup=1;display="Modem";slotselect
+/bluetooth     emmc    /dev/block/bootdevice/by-name/bluetooth                   flags=backup=1;subpartitionof=/modem;slotselect
+/dsp           emmc    /dev/block/bootdevice/by-name/dsp                         flags=backup=1;subpartitionof=/modem;slotselect
+/persist       ext4    /dev/block/bootdevice/by-name/persist                     flags=display="Persist"
+/persist_image emmc    /dev/block/bootdevice/by-name/persist                     flags=display="Persist";flashimg=1
+
+# Removable storage
+/usb_otg       auto    /dev/block/sdg1                 /dev/block/sdc        	  flags=fsflags=utf8;display="USB-Storage";storage;wipeingui;removable
+/sdcard1       auto    /dev/block/mmcblk0p1            /dev/block/mmcblk0   	  flags=display="MicroSD";storage;wipeingui;removable
